@@ -1,3 +1,2 @@
 # Frontend
-clase 1
-fronend
+clase 1 fronend
