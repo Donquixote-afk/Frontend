@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Currículum</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgb(118, 118, 118);
+    }
+
+    .top-bar {
+      width: 60%;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-bar input {
+      padding: 8px;
+      width: 70%;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .top-bar a button {
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #5a4a42;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .top-bar a button:hover {
+      background-color: #7b675c;
+    }
+
+    .container {
+      display: flex;
+      background: rgb(196, 196, 196);
+      width: 60%;
+      margin-top: 20px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .image {
+      width: 30%;
+      background: #9f9e9c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .image img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .info {
+      width: 70%;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      color: #5a4a42;
+    }
+
+    p, li {
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    button.toggle {
+      background-color: #9f9e9c;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    button.toggle:hover {
+      background-color: wheat;
+      color: black;
+    }
+
+    .highlight {
+      background-color: yellow;
+      text-decoration: underline;
+    }
+    fieldset{
+      width: 100%;
+    }
+    .pie{
+      border: 1px solid #000;
+      width: 100%;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- Barra superior con buscador y botón de descarga -->
+  <div class="top-bar">
+    <input type="text" id="busqueda" placeholder="Buscar en el currículum..." />
+    <a href="curriculum.pdf" download="Curriculum-Felipe.pdf">
+      <button>Descargar PDF</button>
+    </a>
+    
+    </a>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="container">
+    <div class="image">
+      <img src="Pipeeex.jpg" alt="Foto de perfil" />
+    </div>
+    <div class="info" id="contenido">
+      <h1>Felipe A. Alejandro Lagos Muñoz</h1>
+      <h2>Desarrollador Web</h2>
+      <p><strong>Email:</strong> felipelacost4@gmail.com</p>
+      <p><strong>Teléfono:</strong> +56939325773</p>
+
+      <button class="toggle" onclick="toggleExperiencia()">Mostrar Experiencia</button>
+
+      <div id="experiencia" style="display: none;">
+        <h2>Experiencia</h2>
+        <p>
+          Creación y estructuración de páginas web utilizando HTML básico.<br>
+          Uso de etiquetas semánticas para mejorar la accesibilidad y el SEO.<br>
+          Aplicación de estilos básicos con CSS para mejorar la presentación de las páginas.<br>
+          Colaboración en la implementación de formularios web y enlaces internos.<br>
+          Optimización de código para mejorar la compatibilidad con navegadores.
+        </p>
+      </div>
+
+      <h2>Habilidades</h2>
+      <ul>
+        <li>HTML, CSS, JavaScript</li>
+        <li>Python, SQL</li>
+        <li>Desarrollo Responsivo</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function toggleExperiencia() {
+      const experiencia = document.getElementById("experiencia");
+      const boton = document.querySelector(".toggle");
+
+      if (experiencia.style.display === "none") {
+        experiencia.style.display = "block";
+        boton.textContent = "Ocultar Experiencia";
+      } else {
+        experiencia.style.display = "none";
+        boton.textContent = "Mostrar Experiencia";
+      }
+    }
+
+    const buscador = document.getElementById("busqueda");
+    const contenido = document.getElementById("contenido");
+
+    // Guardamos el contenido original solo una vez
+    let contenidoOriginal = contenido.innerHTML;
+
+    buscador.addEventListener("input", () => {
+      const texto = buscador.value.trim();
+      contenido.innerHTML = contenidoOriginal; // Restaurar contenido original
+
+      if (texto === "") return;
+
+      const regex = new RegExp(`(${texto})`, "gi");
+
+      // Reemplazar cada coincidencia con una versión resaltada
+      contenido.innerHTML = contenido.innerHTML.replace(regex, `<span class="highlight">$1</span>`);
+    });
+  </script>
+
+  
+</body>
+</html>
